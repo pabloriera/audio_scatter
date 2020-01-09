@@ -1,2 +1,2 @@
 # jupyter-scatter-sound
-Playsound clicking on a scatterplot
+Play sound clicking on a scatterplot on jupyter
