@@ -8,15 +8,7 @@ Play sound clicking on a scatterplot on jupyter
 pip install -r requeriments.txt
 ```
 
-Interactive notebook plots can be used with
-```
-%matplotlib notebook
-```
-or
-```
-%matplotlib widgets
-```
-for the later this dependencies are needed
+Install ipympl if %matplotlib widgets is used insted of %matplotlib notebook
 
 ```
 pip install ipympl
