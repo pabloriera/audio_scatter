@@ -6,6 +6,11 @@ Play sound clicking on a scatterplot on jupyter
 
 ```
 pip install -r requeriments.txt
+```
+
+Install ipympl if %matplotlib widgets is used insted of %matplotlib notebook
+
+```
 pip install ipympl
 jupyter nbextension install --py ipympl
 jupyter nbextension enable --py ipympl
