@@ -11,7 +11,7 @@ def create_player(player_id):
 
 
 def play(filename, player_id, autoplay=True):
-    update_display(Audio(filename, autoplay=autoplay), display_id=player_id)
+    update_display(Audio(filename=filename, autoplay=autoplay), display_id=player_id)
 
 
 def audio_scatter(data, x='x', y='y', audio_path='audio_path', text='text', player_id=None, circle_radius=0.03, figsize=None, **kwargs):
