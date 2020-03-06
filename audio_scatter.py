@@ -10,11 +10,11 @@ def create_player(player_id):
     display_handle = display(HTML(html), display_id=player_id)
 
 
-def play(filename, player_id, autoplay=True):
-    update_display(Audio(filename=filename, autoplay=autoplay), display_id=player_id)
+def play(filename, player_id, autoplay=True, norm=True):
+    update_display(Audio(filename=filename, autoplay=autoplay, norm=norm), display_id=player_id)
 
 
-def audio_scatter(data, x='x', y='y', audio_path='audio_path', text='text', player_id=None, circle_radius=0.03, figsize=None, **kwargs):
+def audio_scatter(data, x='x', y='y', audio_path='audio_path', text='text', player_id=None,norm=True, circle_radius=0.03, figsize=None, **kwargs):
     assert player_id is not None
 
     fig, ax = plt.subplots(1, figsize=figsize)
@@ -36,7 +36,7 @@ def audio_scatter(data, x='x', y='y', audio_path='audio_path', text='text', play
         tx.set_y(event.ydata)
         circ.set_center(transform_coords((r[x], r[y]), ax, fig))
         fig.canvas.draw()
-        play(r[audio_path], player_id)
+        play(r[audio_path], player_id,norm=norm)
 
     fig.canvas.mpl_connect('button_press_event', onclick)
 
