@@ -29,15 +29,15 @@ def create_player(player_id):
 
 
 
-def play(filename, player_id, autoplay=True, start=None, stop=None):
+def play(filename, player_id, autoplay=True, normalize=True, start=None, stop=None):
     if start is not None and stop is not None:
         raw_wav = raw_wav_segment(filename, start, stop)
-        update_display(Audio(data=raw_wav, autoplay=autoplay), display_id=player_id)
+        update_display(Audio(data=raw_wav, autoplay=autoplay, normalize=normalize), display_id=player_id)
     else:
-        update_display(Audio(filename, autoplay=autoplay), display_id=player_id)
+        update_display(Audio(filename, autoplay=autoplay, normalize=normalize), display_id=player_id)
 
 
-def audio_scatter(data, x='x', y='y', audio_path='audio_path', text='text', player_id=None, circle_radius=0.03, figsize=None, start=None, stop=None, **kwargs):
+def audio_scatter(data, x='x', y='y', audio_path='audio_path', text='text', player_id=None, normalize=True, circle_radius=0.03, figsize=None, start=None, stop=None, **kwargs):
     assert player_id is not None
 
     fig, ax = plt.subplots(1, figsize=figsize)
@@ -65,7 +65,8 @@ def audio_scatter(data, x='x', y='y', audio_path='audio_path', text='text', play
         else:
             _start = None
             _stop = None
-        play(r[audio_path], player_id, start=_start, stop=_stop)
+        play(r[audio_path], player_id, normalize=normalize, start=_start, stop=_stop)
+
 
     fig.canvas.mpl_connect('button_press_event', onclick)
 
