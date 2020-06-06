@@ -8,9 +8,10 @@ import wave
 from io import BytesIO
 from IPython import embed
 
+
 def raw_wav_segment(filename, start, stop):
     audio_segment = AudioSegment.from_file(filename)
-    raw_data = audio_segment[start*1000:stop*1000].raw_data
+    raw_data = audio_segment[start * 1000:stop * 1000].raw_data
     fp = BytesIO()
     wave_data = wave.open(fp, 'wb')
     wave_data.setnchannels(audio_segment.channels)
@@ -21,12 +22,11 @@ def raw_wav_segment(filename, start, stop):
     raw_wav = fp.getvalue()
     wave_data.close()
     return raw_wav
-    
+
 
 def create_player(player_id):
     html = """<audio controls="true"></audio>"""
     display_handle = display(HTML(html), display_id=player_id)
-
 
 
 def play(filename, player_id, autoplay=True, normalize=True, start=None, stop=None):
@@ -37,7 +37,7 @@ def play(filename, player_id, autoplay=True, normalize=True, start=None, stop=No
         update_display(Audio(filename, autoplay=autoplay, normalize=normalize), display_id=player_id)
 
 
-def audio_scatter(data, x='x', y='y', audio_path='audio_path', text='text', player_id=None, normalize=True, circle_radius=0.03, figsize=None, start=None, stop=None, **kwargs):
+def audio_scatter(data, x='x', y='y', audio_path='audio_path', label=None, player_id=None, normalize=True, circle_radius=0.03, figsize=None, start=None, stop=None, **kwargs):
     assert player_id is not None
 
     fig, ax = plt.subplots(1, figsize=figsize)
@@ -54,7 +54,10 @@ def audio_scatter(data, x='x', y='y', audio_path='audio_path', text='text', play
         d = np.square(event.xdata - data[x].values) + np.square(event.ydata - data[y].values)
         ix = np.argmin(d)
         r = data.iloc[ix]
-        tx.set_text('{} ({})'.format(r.name, r[text]))
+        if label is not None and label in r:
+            tx.set_label('{} ({})'.format(r.name, r[label]))
+        else:
+            tx.set_label(r.name)
         tx.set_x(event.xdata)
         tx.set_y(event.ydata)
         circ.set_center(transform_coords((r[x], r[y]), ax, fig))
@@ -66,7 +69,6 @@ def audio_scatter(data, x='x', y='y', audio_path='audio_path', text='text', play
             _start = None
             _stop = None
         play(r[audio_path], player_id, normalize=normalize, start=_start, stop=_stop)
-
 
     fig.canvas.mpl_connect('button_press_event', onclick)
 
