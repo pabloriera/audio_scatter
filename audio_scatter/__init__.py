@@ -51,18 +51,13 @@ def audio_scatter(data, x='x', y='y', audio_path='audio_path', label=None, playe
     ax.add_artist(circ)
 
     def onclick(event):
-<<<<<<< HEAD:audio_scatter/__init__.py
-        
-        d = np.square(event.xdata - data[x].values) + np.square(event.ydata - data[y].values)
-=======
         d = np.square(event.xdata - data[x].values) + \
             np.square(event.ydata - data[y].values)
->>>>>>> 9e3a3bba6ab3ef54a0537a2854196579f3c41473:audio_scatter.py
         ix = np.argmin(d)
         r = data.iloc[ix]
         print(r)
         if label is not None and label in r:
-            tx.set_text('{} ({})'.format(r.name, r[label]))      
+            tx.set_text('{} ({})'.format(r.name, r[label]))
         else:
             tx.set_text(r.name)
         tx.set_x(event.xdata)
