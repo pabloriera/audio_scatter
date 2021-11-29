@@ -2,11 +2,12 @@ import plotly.graph_objs as go
 import plotly.express as px
 from IPython.display import HTML, Audio, update_display, display
 from . import play, create_player
+import random
 
 
 def audio_scatter(data, x='x', y='y', z=None, audio_path='audio_path', label=None, player_id=None, normalize=True, start=None, stop=None, action='hover', **kwargs):
     if player_id is None:
-        player_id = 1234567
+        player_id = random.getrandbits(128)
         create_player(player_id)
 
     if z is not None:

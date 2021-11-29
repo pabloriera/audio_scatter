@@ -6,6 +6,7 @@ import numpy as np
 from pydub import AudioSegment
 import wave
 from io import BytesIO
+import random
 
 
 def raw_wav_segment(filename, start, stop):
@@ -39,7 +40,9 @@ def play(filename, player_id, autoplay=True, normalize=True, start=None, stop=No
 
 
 def audio_scatter(data, x='x', y='y', audio_path='audio_path', label=None, player_id=None, normalize=True, circle_radius=0.03, figsize=None, start=None, stop=None, **kwargs):
-    assert player_id is not None
+    if player_id is None:
+        player_id = random.getrandbits(128)
+        create_player(player_id)
 
     fig, ax = plt.subplots(1, figsize=figsize)
     sns.scatterplot(x=x, y=y, data=data, ax=ax, **kwargs)

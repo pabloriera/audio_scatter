@@ -2,13 +2,23 @@
 
 Play sound clicking on a scatterplot on jupyter
 
-## Install requeriments
+```python
 
-```
-pip install -r requeriments.txt
+from audio_scatter.plotly import audio_scatter
+
+audio_scatter(data,x='x',y='y',z='z', label='label',color='color', action='click')
 ```
 
-Install ipympl if %matplotlib widgets is used insted of %matplotlib notebook
+![capture.png](capture.png)
+
+
+## Run demo
+
+Demo example in Demo.ipynb
+
+## Legacy
+
+If using without plotly and if %matplotlib widgets is used insted of %matplotlib notebook, install ipympl.
 
 ```
 pip install ipympl
@@ -16,6 +26,4 @@ jupyter nbextension install --py ipympl
 jupyter nbextension enable --py ipympl
 ```
 
-## Run demo
 
-Demo example in Demo.ipynb
