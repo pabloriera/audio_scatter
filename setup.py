@@ -9,6 +9,7 @@ setup(
         'matplotlib>=3.1.2',
         'numpy>=1.17.4',
         'ipython>=7.11.1',
-        'pandas>=0.25.3'
+        'pandas>=0.25.3',
+        'plotly'
     ],
 )
